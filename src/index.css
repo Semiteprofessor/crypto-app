@@ -1,33 +1,106 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/** @format */
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
-body{
-    font-family: 'Quicksand'
+.menu-title {
+	font-size: 16px;
+	font-weight: bold;
 }
 
-.menu-avatar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 50px;
+.header {
+	width: 100%;
 }
-.menu-content-container {
-    display: flex;
-    align-items: center;
-    margin-right: 30px;
+.sidebar {
+	background-color: black;
 }
 
-.menu-avatar-name {
-    font-size: 17px;
-    font-weight: bold;
+.nav {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	justify-content: space-between;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+		rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-.ant-avatar {
-    width: 30px;
-    height: 30px;
-    background-color: #f8f9fa;
-    border: 2px solid #ddd;
+.search {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+		rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+#components-layout-demo-custom-trigger .trigger {
+	padding: 0 24px;
+	font-size: 18px;
+	line-height: 64px;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+	color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+	height: 32px;
+	margin: 16px;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+	background: #fff;
+}
+
+.action {
+	display: flex;
+	justify-content: space-between;
+	max-width: 130px;
+}
+
+.action1 {
+	border: 1px solid bold;
+	background-color: rgb(57, 165, 57);
+	padding: 10px;
+	font-size: 20px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+		rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+	cursor: pointer;
+}
+
+.action2 {
+	border: 1px solid bold;
+	background-color: rgb(0, 174, 255);
+	padding: 10px;
+	font-size: 20px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+		rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+	cursor: pointer;
+}
+
+.action3 {
+	border: 1px solid bold;
+	background-color: rgb(255, 102, 0);
+	padding: 10px;
+	font-size: 20px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+		rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+	cursor: pointer;
+}
+
+.trigger {
+	font-size: 28px;
+	margin-left: 10px;
+}
+
+.avatar {
+	font-size: 28px;
+	border: 2px solid gray;
+	background-color: rgb(121, 235, 121);
+	border-radius: 50px;
+	padding: 5px;
+	margin-right: 30px;
+	cursor: pointer;
 }
