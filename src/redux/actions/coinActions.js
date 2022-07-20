@@ -1,23 +1,23 @@
 /** @format */
 
 import * as actionTypes from "../constants/coinConstants";
-import rapidapi from "../../api/cryptoApi";
+import coingecko from "../../api/cryptoApi";
 
-export const fetchCoin = () => async (dispatch) => {
+export const getCoins = () => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_COINS_REQUEST });
-		const { data } = await rapidapi.get("/api/coins");
+		const { data } = await coingecko.get("/coins/list");
 		dispatch({ type: actionTypes.GET_COINS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({ type: actionTypes.GET_COINS_FAIL, payload: error.message });
 	}
 };
 
-export const fetchCoinDetails = (id) => async (dispatch) => {
+export const getCoinDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_COIN_DETAILS_REQUEST });
-		const { data } = await rapidapi.get(
-			`/api/coins/${id}?localization=false&tickers=false&market_data=true&community_data=true&sparkline=false&developer_data=true`,
+		const { data } = await coingecko.get(
+			`/coins/${id}?localization=false&tickers=false&market_data=true&community_data=true&sparkline=false&developer_data=true`,
 		);
 		dispatch({ type: actionTypes.GET_COIN_DETAILS_SUCCESS, payload: data });
 	} catch (error) {
@@ -28,11 +28,11 @@ export const fetchCoinDetails = (id) => async (dispatch) => {
 	}
 };
 
-export const fetchCoinMarketDetails = (id) => async (dispatch) => {
+export const getCoinMarketDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_COINS_CHART_REQUEST });
-		const { data } = await rapidapi.get(
-			`/api/coins/${id}/market_chart?vs_currency=usd&days=7`,
+		const { data } = await coingecko.get(
+			`/coins/${id}/market_chart?vs_currency=usd&days=7`,
 		);
 		dispatch({ type: actionTypes.GET_COINS_CHART_SUCCESS, payload: data });
 	} catch (error) {
@@ -43,20 +43,20 @@ export const fetchCoinMarketDetails = (id) => async (dispatch) => {
 	}
 };
 
-export const fetchEvents = () => async (dispatch) => {
+export const getEvents = () => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_EVENTS_REQUEST });
-		const { data } = await rapidapi.get("/api/events");
+		const { data } = await coingecko.get("/events");
 		dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({ type: actionTypes.GET_EVENTS_FAIL, payload: error.message });
 	}
 };
 
-export const fetchExchangeRates = () => async (dispatch) => {
+export const getExchangeRates = () => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_EXCHANGE_RATES_REQUEST });
-		const { data } = await rapidapi.get("/api/exchange_rates");
+		const { data } = await coingecko.get("/exchange_rates");
 		dispatch({ type: actionTypes.GET_EXCHANGE_RATES_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -66,10 +66,10 @@ export const fetchExchangeRates = () => async (dispatch) => {
 	}
 };
 
-export const fetchExchanges = () => async (dispatch) => {
+export const getExchanges = () => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_EXCHANGES_REQUEST });
-		const { data } = await rapidapi.get("/api/exchanges");
+		const { data } = await coingecko.get("/exchanges");
 		dispatch({ type: actionTypes.GET_EXCHANGES_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -79,10 +79,10 @@ export const fetchExchanges = () => async (dispatch) => {
 	}
 };
 
-export const fetchStatusUpdates = () => async (dispatch) => {
+export const getStatusUpdates = () => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.GET_STATUS_UPDATE_REQUEST });
-		const { data } = await rapidapi.get("/api/status_updates");
+		const { data } = await coingecko.get("/status_updates");
 		dispatch({ type: actionTypes.GET_STATUS_UPDATE_SUCCESS, payload: data });
 	} catch (error) {
 		dispatch({
@@ -92,7 +92,15 @@ export const fetchStatusUpdates = () => async (dispatch) => {
 	}
 };
 
-export const fetchGlobal = () => async (dispatch) => {
+export const getGlobal = () => async (dispatch) => {
 	try {
-	} catch (error) {}
+		dispatch({ type: actionTypes.GET_GLOBAL_REQUEST });
+		const { data } = await coingecko.get("/global");
+		dispatch({ type: actionTypes.GET_GLOBAL_SUCCESS, payload: data });
+	} catch (error) {
+		dispatch({
+			type: actionTypes.GET_GLOBAL_FAIL,
+			payload: error.message,
+		});
+	}
 };

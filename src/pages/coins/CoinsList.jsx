@@ -1,96 +1,71 @@
 /** @format */
 
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { Layout, Table } from "antd";
-import React from "react";
-import { contentStyle } from "../../styles/style";
+import { Layout, Table, Button, Tag } from "antd";
+import { contentStyle, tableStyle } from "../../styles/style";
+import axios from "axios";
+
+// Actions
+import { getCoins as listCoins } from "../../redux/actions/coinActions";
 
 const Content = Layout;
-const columns = [
-	{
-		title: "Full Name",
-		width: 100,
-		dataIndex: "name",
-		key: "name",
-		fixed: "left",
-	},
-	{
-		title: "Age",
-		width: 100,
-		dataIndex: "age",
-		key: "age",
-		fixed: "left",
-	},
-	{
-		title: "Column 1",
-		dataIndex: "address",
-		key: "1",
-		width: 150,
-	},
-	{
-		title: "Column 2",
-		dataIndex: "address",
-		key: "2",
-		width: 150,
-	},
-	{
-		title: "Column 3",
-		dataIndex: "address",
-		key: "3",
-		width: 150,
-	},
-	{
-		title: "Column 4",
-		dataIndex: "address",
-		key: "4",
-		width: 150,
-	},
-	{
-		title: "Column 5",
-		dataIndex: "address",
-		key: "5",
-		width: 150,
-	},
-	{
-		title: "Action",
-		key: "operation",
-		fixed: "right",
-		width: 100,
-		render: () => (
-			<div className="action">
-				<div className="action1">
-					<EditOutlined />
-				</div>
-				<div className="action2">
-					<EyeOutlined />
-				</div>
-				<div className="action3">
-					<DeleteOutlined />
-				</div>
-			</div>
-		),
-	},
-];
-const data = [];
 
-for (let i = 0; i < 100; i++) {
-	data.push({
-		key: i,
-		name: `Edrward ${i}`,
-		age: 32,
-		address: `London Park no. ${i}`,
-	});
-}
+const CoinsList = () => {
+	const columns = [
+		{
+			title: "Id",
+			dataIndex: "id",
+			key: "id",
+		},
+		{
+			title: "Symbol",
+			dataIndex: "symbol",
+			key: "symbol",
+		},
+		{
+			title: "Name",
+			dataIndex: "name",
+			key: "name",
+			render: (item) => <Tag color="purple">{item}</Tag>,
+		},
+		{
+			title: "View Details",
+			dataIndex: "id",
+			key: "id",
+			render: (id) => (
+				<Button type="primary">
+					<Link to={`/coins/${id}`}>View</Link>
+				</Button>
+			),
+		},
+	];
 
-const CoinsList = () => (
-	<Layout style={{ padding: "1rem" }}>
-		<Content style={contentStyle}>
-			<Table
-				columns={columns}
-				dataSource={data}
-			/>
-		</Content>
-	</Layout>
-);
+	const dispatch = useDispatch();
+
+	const getCoin = useSelector((state) => state.getCoins);
+	const { coins, loading, error } = getCoin;
+
+	useEffect(() => {
+		dispatch(listCoins());
+	}, [dispatch]);
+
+	return (
+		<Layout style={{ padding: "1rem" }}>
+			<Content style={contentStyle}>
+				<Table
+					style={tableStyle}
+					bordered={true}
+					loading={loading}
+					error={error}
+					dataSource={coins}
+					columns={columns}
+				/>
+			</Content>
+		</Layout>
+	);
+};
 
 export default CoinsList;

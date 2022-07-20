@@ -3,13 +3,17 @@
 import { market_processed_table_keys } from "../constants/marketConstants";
 import * as actionTypes from "../constants/coinConstants";
 
-export const coinsReducer = (state = [], action) => {
-	const { type, payload } = action;
-	switch (type) {
+export const coinsReducer = (state = { coins: [] }, action) => {
+	switch (action.type) {
+		case actionTypes.GET_COINS_REQUEST:
+			return {
+				loading: true,
+				coins: [],
+			};
 		case actionTypes.GET_COINS_SUCCESS:
-			return payload;
+			return { coins: action.payload, loading: false };
 		case actionTypes.GET_COINS_FAIL:
-			return { loading: false, error: payload };
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}
@@ -53,7 +57,7 @@ export const coinDetailsReducer = (state = {}, action) => {
 	}
 };
 
-export const globalReducer = (state = {}, action) => {
+export const globalReducer = (state = {global: []}, action) => {
 	const { type, payload } = action;
 	switch (type) {
 		case actionTypes.GET_GLOBAL_SUCCESS:
